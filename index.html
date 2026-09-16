@@ -596,6 +596,41 @@ section{
   font-style:italic;
 }
 
+/* ===== Quran Ayah ===== */
+.ayah-card{padding:48px 30px;}
+.ayah-arabic{
+  font-family:'Amiri', serif;
+  font-weight:700;
+  font-size:clamp(24px,4.6vw,32px);
+  line-height:2.15;
+  color:var(--brown-deep);
+  direction:rtl;
+}
+.ayah-divider{
+  font-family:'Amiri', serif;
+  color:var(--gold-deep);
+  font-size:15px;
+  opacity:0.8;
+  margin:14px 0 26px;
+  letter-spacing:2px;
+}
+.ayah-translation{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:19px;
+  line-height:1.9;
+  color:var(--brown);
+  max-width:520px;
+  margin:0 auto 18px;
+}
+.ayah-reference{
+  font-family:'Poppins',sans-serif;
+  font-size:12px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+}
+
 /* ===== Family ===== */
 .family-grid{
   display:grid;
@@ -1038,6 +1073,19 @@ html.locked, html.locked body{overflow:hidden;height:100%;}
       </svg>
     </span>
     <p class="story-text">Our story began with a simple meeting that slowly turned into something beautiful. What started as a small connection grew into understanding, trust, and love. With the blessings of Allah, our journey brought us together and led us to this beautiful new chapter of our lives.</p>
+  </div>
+</section>
+
+<!-- QURAN AYAH -->
+<section id="ayah" class="reveal">
+  <div class="section-kicker">A Verse to Reflect</div>
+  <h2 class="section-title">Words from the Qur'an</h2>
+  <div class="ornament-divider"><span>❖</span></div>
+  <div class="story-card ayah-card">
+    <p class="ayah-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</p>
+    <div class="ayah-divider"><span>﴿ ٢١ ﴾</span></div>
+    <p class="ayah-translation">"And one of His signs is that He created for you spouses from among yourselves so that you may find comfort in them. And He has placed between you compassion and mercy. Surely in this are signs for people who reflect."</p>
+    <p class="ayah-reference">Surah Ar-Rum · 30:21</p>
   </div>
 </section>
 

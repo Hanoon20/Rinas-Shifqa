@@ -120,7 +120,7 @@ button,a{
 }
 .lantern{
   position:absolute;
-  top:-90px;
+  top:var(--drop-top,16px);
   width:34px;
   z-index:1;
   pointer-events:none;
@@ -146,8 +146,8 @@ button,a{
   opacity:0.92;
 }
 @keyframes lantern-drop{
-  from{top:-90px;}
-  to{top:var(--drop-top,16px);}
+  from{transform:translateY(-120px);}
+  to{transform:translateY(0);}
 }
 @keyframes lantern-sway{
   0%,100%{transform:rotate(-5deg);}
@@ -199,7 +199,9 @@ section{
 /* ===== HERO ===== */
 .hero{
   min-height:100vh;
-  min-height:100dvh;
+  /* svh, not dvh: dvh recomputes as the mobile address bar collapses during
+     scroll, reflowing everything below the hero mid-scroll. svh is stable. */
+  min-height:100svh;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -219,17 +221,24 @@ section{
   background:linear-gradient(180deg, rgba(176,141,87,0.10), rgba(255,255,255,0.25));
   box-shadow:0 0 0 6px rgba(176,141,87,0.10), 0 0 60px rgba(176,141,87,0.12) inset;
   opacity:0;
-  transform:perspective(1200px) rotateX(-65deg) translateY(-16px);
+  transform:perspective(1200px) rotateX(-28deg) translateY(-14px);
+}
+/* Steep 3D angles make the browser re-rasterize the text at a very different
+   scale each frame, which reads as a shimmer/shake. Gentler angles plus
+   backface-visibility keep the depth cue without the flicker. */
+.hero-arch,.hero-arch .crescent,.hero-arch .bismillah,.hero-arch .hero-sub,
+.hero-arch .couple-names,.hero-arch .hero-date,.hero-arch .hero-venue,.hero-arch .scroll-cue{
+  backface-visibility:hidden;
 }
 @keyframes heroFrameIn{
   to{opacity:1;transform:perspective(1200px) rotateX(0) translateY(0);}
 }
 @keyframes hero3dIn{
-  from{opacity:0;transform:perspective(800px) rotateX(-60deg) translateY(-10px);}
+  from{opacity:0;transform:perspective(800px) rotateX(-30deg) translateY(-10px);}
   to{opacity:1;transform:perspective(800px) rotateX(0) translateY(0);}
 }
 @keyframes heroNamesIn{
-  from{opacity:0;transform:perspective(1000px) rotateY(-48deg) scale(0.85);}
+  from{opacity:0;transform:perspective(1000px) rotateY(-28deg) scale(0.92);}
   to{opacity:1;transform:perspective(1000px) rotateY(0) scale(1);}
 }
 .hero.intro-play .hero-arch{animation:heroFrameIn .9s cubic-bezier(.22,1,.36,1) forwards;}
@@ -260,7 +269,7 @@ section{
   color:var(--gold-deep);
   margin-bottom:6px;
   opacity:0;
-  transform:perspective(800px) rotateX(-60deg) translateY(-10px);
+  transform:perspective(800px) rotateX(-30deg) translateY(-10px);
   animation:glow-pulse 3s ease-in-out infinite;
 }
 @keyframes glow-pulse{
@@ -273,7 +282,7 @@ section{
   color:var(--gold-deep);
   margin-bottom:18px;
   opacity:0;
-  transform:perspective(800px) rotateX(-60deg) translateY(-10px);
+  transform:perspective(800px) rotateX(-30deg) translateY(-10px);
 }
 .hero-sub{
   letter-spacing:5px;
@@ -283,7 +292,7 @@ section{
   color:var(--brown-light);
   margin-bottom:22px;
   opacity:0;
-  transform:perspective(800px) rotateX(-60deg) translateY(-10px);
+  transform:perspective(800px) rotateX(-30deg) translateY(-10px);
 }
 .couple-names{
   font-family:'Great Vibes', cursive;
@@ -292,7 +301,7 @@ section{
   line-height:1.15;
   text-shadow:0 0 24px rgba(176,141,87,0.25);
   opacity:0;
-  transform:perspective(1000px) rotateY(-48deg) scale(0.85);
+  transform:perspective(1000px) rotateY(-28deg) scale(0.92);
 }
 .couple-names .amp{
   display:block;
@@ -308,7 +317,7 @@ section{
   text-transform:uppercase;
   color:var(--brown);
   opacity:0;
-  transform:perspective(800px) rotateX(-60deg) translateY(-10px);
+  transform:perspective(800px) rotateX(-30deg) translateY(-10px);
 }
 .hero-date strong{color:var(--gold-deep);}
 .hero-venue{
@@ -317,7 +326,7 @@ section{
   color:var(--gold-deep);
   font-style:italic;
   opacity:0;
-  transform:perspective(800px) rotateX(-60deg) translateY(-10px);
+  transform:perspective(800px) rotateX(-30deg) translateY(-10px);
 }
 .scroll-cue{
   margin-top:38px;
@@ -326,7 +335,7 @@ section{
   letter-spacing:2px;
   color:var(--brown);
   opacity:0;
-  transform:perspective(800px) rotateX(-60deg) translateY(-10px);
+  transform:perspective(800px) rotateX(-30deg) translateY(-10px);
   animation:bob 2s ease-in-out infinite;
   text-transform:uppercase;
 }
@@ -801,7 +810,11 @@ footer{
 html.locked, html.locked body{overflow:hidden;height:100%;}
 #mainInvitation{
   opacity:0;
-  transition:opacity .8s ease;
+  /* Kept short on purpose: while this parent is mid-opacity-transition the
+     hero's 3D transforms can't composite on their own and get re-rasterized
+     every frame, which shows up as a shake. The opening screen is still
+     fading out over the top here, so a long fade buys nothing. */
+  transition:opacity .25s ease;
 }
 #mainInvitation.revealed{opacity:1;}
 
@@ -1253,6 +1266,7 @@ const io = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       entry.target.classList.add('in');
+      io.unobserve(entry.target);
     }
   });
 },{threshold:0.15});

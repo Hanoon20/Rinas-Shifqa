@@ -71,6 +71,12 @@ button,a{
   z-index:1;
   overflow:hidden;
 }
+#lanterns{
+  position:absolute;
+  top:0;left:0;width:100%;height:0;
+  pointer-events:none;
+  z-index:1;
+}
 .sparkle{
   position:absolute;
   width:5px;height:5px;
@@ -890,6 +896,7 @@ html.locked, html.locked body{overflow:hidden;height:100%;}
 
 <!-- HERO -->
 <section class="hero">
+  <div id="lanterns"></div>
   <div class="hero-arch reveal">
     <div class="crescent">☾ ✦ ☽</div>
     <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
@@ -1081,6 +1088,7 @@ const lanternSVG = `
   <path d="M20 48.5v4.5" stroke="#b08d57" stroke-width="1"/>
   <circle cx="20" cy="54.5" r="1.7" fill="#b08d57"/>
 </svg>`;
+const lanternsRoot = document.getElementById('lanterns');
 const lanternPositions = ['6%','32%','66%','88%'];
 lanternPositions.forEach((pos,i)=>{
   const l = document.createElement('div');
@@ -1090,7 +1098,7 @@ lanternPositions.forEach((pos,i)=>{
   l.style.setProperty('--drop-top', (14 + (i%2)*26)+'px');
   l.style.animationDelay = (i*0.3)+'s';           // stagger the drop-in
   l.querySelector('svg').style.animationDelay = (i*0.4)+'s'; // stagger the sway
-  particlesRoot.appendChild(l); // inside overflow:hidden layer -> can't cause horizontal scroll
+  lanternsRoot.appendChild(l); // scoped to the hero so lanterns scroll away with it instead of staying pinned to the viewport
 });
 
 /* ===================== Scroll reveal ===================== */

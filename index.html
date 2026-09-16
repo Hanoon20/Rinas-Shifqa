@@ -750,6 +750,14 @@ footer{
   color:var(--gold-deep);
   font-weight:600;
 }
+.designer-link{
+  color:var(--gold-deep);
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px solid rgba(176,141,87,0.45);
+  transition:border-color .3s ease;
+}
+.designer-link:hover{border-color:var(--gold-deep);}
 
 /* ===== Music toggle ===== */
 .music-toggle{
@@ -893,9 +901,10 @@ html.locked, html.locked body{overflow:hidden;height:100%;}
 .envelope-card-monogram{
   font-family:'Great Vibes', cursive;
   color:var(--gold-deep);
-  font-size:20px;
+  font-size:clamp(14px,4.2vw,18px);
   margin-top:4px;
   opacity:0;
+  white-space:nowrap;
 }
 .envelope-flap{
   position:absolute;top:0;left:0;right:0;height:58%;
@@ -990,7 +999,7 @@ html.locked, html.locked body{overflow:hidden;height:100%;}
         <span class="envelope-card">
           <span class="envelope-card-line"></span>
           <span class="envelope-card-line"></span>
-          <span class="envelope-card-monogram">R &amp; S</span>
+          <span class="envelope-card-monogram">Rinas &amp; Shifqa</span>
         </span>
       </button>
     </div>
@@ -1138,7 +1147,7 @@ html.locked, html.locked body{overflow:hidden;height:100%;}
 
 <div class="designer-credit reveal">
   <div class="ornament-divider"><span>❖</span></div>
-  <p>Made with ♥ <strong>Dearday.lk</strong> · 071 690 3578</p>
+  <p>Made with ♥ <a href="https://dearday.lk" target="_blank" rel="noopener" class="designer-link">Dearday.lk</a> · 071 690 3578</p>
 </div>
 
 </div><!-- /#mainInvitation -->

@@ -181,6 +181,7 @@ section{
 /* ===== HERO ===== */
 .hero{
   min-height:100vh;
+  min-height:100dvh;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -1192,7 +1193,7 @@ function stopAmbiance(){
   oscillators = [];
   if(audioCtx) audioCtx.close();
 }
-musicBtn.addEventListener('click', ()=>{
+musicBtn?.addEventListener('click', ()=>{
   playing = !playing;
   if(playing){
     startAmbiance();

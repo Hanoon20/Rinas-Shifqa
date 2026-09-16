@@ -81,9 +81,10 @@ button,a{
   width:5px;height:5px;
   background:var(--gold-light);
   border-radius:50%;
-  box-shadow:0 0 8px 2px var(--gold-light);
+  box-shadow:0 0 5px 1px var(--gold-light);
   opacity:0;
   animation:sparkle-float linear infinite;
+  will-change:transform,opacity;
 }
 @keyframes sparkle-float{
   0%{transform:translateY(0) translateX(0) scale(0.3);opacity:0;}
@@ -95,7 +96,7 @@ button,a{
   position:absolute;
   width:16px;
   animation:heart-fall linear infinite;
-  filter:drop-shadow(0 1px 2px rgba(140,98,57,0.18));
+  will-change:transform,opacity;
 }
 .heart-particle svg{display:block;width:100%;height:auto;}
 @keyframes heart-fall{
@@ -618,8 +619,8 @@ section{
 .ayah-translation{
   font-family:'Tiro Tamil', serif;
   font-style:italic;
-  font-size:17px;
-  line-height:2;
+  font-size:14px;
+  line-height:1.9;
   color:var(--brown);
   max-width:520px;
   margin:0 auto 18px;
@@ -1184,10 +1185,10 @@ function spawnHeart(){
   particlesRoot.appendChild(h);
   setTimeout(()=>h.remove(), 21000);
 }
-setInterval(spawnSparkle, 400);
-setInterval(spawnHeart, 1500);
-for(let i=0;i<20;i++) setTimeout(spawnSparkle, i*150);
-for(let i=0;i<6;i++) setTimeout(spawnHeart, i*300);
+setInterval(spawnSparkle, 800);
+setInterval(spawnHeart, 2400);
+for(let i=0;i<10;i++) setTimeout(spawnSparkle, i*150);
+for(let i=0;i<4;i++) setTimeout(spawnHeart, i*300);
 
 /* Hanging lanterns — elegant gold fanoos (renders identically on every device) */
 const lanternSVG = `

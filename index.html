@@ -227,7 +227,8 @@ section{
    scale each frame, which reads as a shimmer/shake. Gentler angles plus
    backface-visibility keep the depth cue without the flicker. */
 .hero-arch,.hero-arch .crescent,.hero-arch .bismillah,.hero-arch .hero-sub,
-.hero-arch .couple-names,.hero-arch .hero-date,.hero-arch .hero-venue,.hero-arch .scroll-cue{
+.hero-arch .couple-names,.hero-arch .hero-rings,.hero-arch .hero-date,
+.hero-arch .hero-venue,.hero-arch .scroll-cue{
   backface-visibility:hidden;
 }
 @keyframes heroFrameIn{
@@ -246,12 +247,14 @@ section{
 .hero.intro-play .hero-arch .bismillah{animation:hero3dIn .7s ease forwards;animation-delay:.65s;}
 .hero.intro-play .hero-arch .hero-sub{animation:hero3dIn .7s ease forwards;animation-delay:.95s;}
 .hero.intro-play .hero-arch .couple-names{animation:heroNamesIn .9s cubic-bezier(.22,1,.36,1) forwards;animation-delay:1.15s;}
+.hero.intro-play .hero-arch .hero-rings{animation:hero3dIn .7s ease forwards;animation-delay:1.38s;}
 .hero.intro-play .hero-arch .hero-date{animation:hero3dIn .7s ease forwards;animation-delay:1.55s;}
 .hero.intro-play .hero-arch .hero-venue{animation:hero3dIn .7s ease forwards;animation-delay:1.75s;}
 .hero.intro-play .hero-arch .scroll-cue{animation:hero3dIn .7s ease forwards,bob 2s ease-in-out infinite;animation-delay:1.95s,2.65s;}
 @media (prefers-reduced-motion: reduce){
   .hero-arch,.hero-arch .crescent,.hero-arch .bismillah,.hero-arch .hero-sub,
-  .hero-arch .couple-names,.hero-arch .hero-date,.hero-arch .hero-venue,.hero-arch .scroll-cue{
+  .hero-arch .couple-names,.hero-arch .hero-rings,.hero-arch .hero-date,
+  .hero-arch .hero-venue,.hero-arch .scroll-cue{
     opacity:1;transform:none;animation:none;
   }
   .hero.intro-play .hero-arch .scroll-cue{animation:bob 2s ease-in-out infinite;}
@@ -308,6 +311,17 @@ section{
   font-size:0.5em;
   color:var(--gold-deep);
   margin:2px 0;
+}
+.hero-rings{
+  margin-top:18px;
+  opacity:0;
+  transform:perspective(800px) rotateX(-30deg) translateY(-10px);
+}
+.hero-rings img{
+  width:84px;
+  height:auto;
+  display:block;
+  margin:0 auto;
 }
 .hero-date{
   margin-top:22px;
@@ -1041,6 +1055,7 @@ html.locked, html.locked body{overflow:hidden;height:100%;}
     <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
     <div class="hero-sub">Waleema Ceremony</div>
     <div class="couple-names">Rinas<span class="amp">&amp;</span>Shifqa</div>
+    <div class="hero-rings"><img src="assets/rings-icon.webp" alt="" width="240" height="133"></div>
     <div class="hero-date">Sunday · <strong>4th October 2026</strong> · 12:30 PM</div>
     <div class="hero-venue">AJ Reception Hall, Thillaiyadi, Puttalam</div>
     <div class="scroll-cue">Scroll to Begin ↓</div>
